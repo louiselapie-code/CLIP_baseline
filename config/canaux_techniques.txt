@@ -1,0 +1,8 @@
+# Canaux techniques / morphologie CosMx à exclure du vecteur protéine.
+# Un nom par ligne. Doit correspondre EXACTEMENT à adata.var_names
+# (casse, espaces et "/" compris). Les lignes commençant par # sont ignorées.
+Channel-DNA
+Channel-Membrane
+Channel-PanCK
+Channel-CD45
+Channel-CD68

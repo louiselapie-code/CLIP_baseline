@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Environnements
+.venv/
+env/
+envs/
+*.conda/
+
+# Données lourdes
+data/
+*.h5ad
+*.npy
+*.npz
+*.h5
+*.pt
+*.pth
+
+# Résultats / runs
+runs/
+
+# Logs
+*.log
+*.err
+*.out
+
+# Mac
+.DS_Store
