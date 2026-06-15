@@ -18,9 +18,6 @@ data/
 *.pt
 *.pth
 
-# Résultats / runs
-runs/
-
 # Logs
 *.log
 *.err
