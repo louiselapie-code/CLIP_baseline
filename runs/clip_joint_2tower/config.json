@@ -1,0 +1,16 @@
+{
+  "prot_dims": {
+    "cosmx": 64,
+    "xenium": 27
+  },
+  "rna_dim": 64,
+  "dproj": 256,
+  "depth": 2,
+  "hidden": 128,
+  "latent": 128,
+  "dropout": 0.1,
+  "tau": 0.07,
+  "lr": 0.0001,
+  "batch": 512,
+  "epochs": 25
+}
