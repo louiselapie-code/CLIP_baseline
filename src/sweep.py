@@ -62,7 +62,7 @@ def run_one(cfg: dict, paired_dir: str, outdir: Path, epochs: int, patience: int
 def main():
     p = argparse.ArgumentParser(description="Sweep léger τ / LR / batch pour le CLIP.")
     p.add_argument("--paired-dir", required=True)
-    p.add_argument("--outdir", default="runs/sweep")
+    p.add_argument("--outdir", default="results/runs/sweep")
     p.add_argument("--taus", type=float, nargs="+", default=[0.05, 0.07, 0.1])
     p.add_argument("--lrs", type=float, nargs="+", default=[1e-4, 3e-4])
     p.add_argument("--batch-sizes", type=int, nargs="+", default=[1024])

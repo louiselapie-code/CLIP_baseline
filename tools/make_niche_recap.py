@@ -1,13 +1,13 @@
 """
 make_niche_recap.py — Figures récap (slides) de l'analyse des niches, à partir des CSV
-déjà produits dans eval/. Aucun calcul lourd, aucune dépendance torch.
+déjà produits dans results/eval/. Aucun calcul lourd, aucune dépendance torch.
 
 Lit :
-  eval/niches_{cosmx,xenium}/niches_summary.csv
-  eval/compare_{cosmx,xenium}/compare_summary.csv
-  eval/info_{cosmx_counts,xenium_counts}/information_summary.csv
+  results/eval/niches_{cosmx,xenium}/niches_summary.csv
+  results/eval/compare_{cosmx,xenium}/compare_summary.csv
+  results/eval/info_{cosmx_counts,xenium_counts}/information_summary.csv
 
-Produit dans --outdir (défaut eval/recap/) :
+Produit dans --outdir (défaut results/eval/recap/) :
   recap1_novae_vs_scconcept.png   FIDE + NMI(vs types) — NOVAE vs scConcept (clip_joint)
   recap2_fide_4espaces.png        FIDE des 4 espaces NOVAE, CosMx vs Xenium
   recap3_information.png          EV protéine (le signal) + EV ARN (près du plancher)
@@ -129,8 +129,8 @@ def fig3_information(base, out):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--eval-dir", default="eval")
-    ap.add_argument("--outdir", default="eval/recap")
+    ap.add_argument("--eval-dir", default="results/eval")
+    ap.add_argument("--outdir", default="results/eval/recap")
     a = ap.parse_args()
     base = Path(a.eval_dir); out = Path(a.outdir); out.mkdir(parents=True, exist_ok=True)
     print("Figures récap ->", out)

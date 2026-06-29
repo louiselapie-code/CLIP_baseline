@@ -38,8 +38,8 @@ Exemple :
   python src/niche_information.py \
     --paired-dir data/processed/cosmx_breast \
     --rna-counts-h5ad data/raw/cosmx_breast/h5ad/cosmx_breast_rna_with_spatial_split_seed42.h5ad \
-    --joint-domains eval/niches_cosmx/domains_clip_joint.npy \
-    --n-domains 10 --outdir eval/info_cosmx
+    --joint-domains results/eval/niches_cosmx/domains_clip_joint.npy \
+    --n-domains 10 --outdir results/eval/info_cosmx
 """
 from __future__ import annotations
 
@@ -281,7 +281,7 @@ def main():
     p.add_argument("--n-domains", type=int, default=10)
     p.add_argument("--svd-pcs", type=int, default=50)
     p.add_argument("--seed", type=int, default=0)
-    p.add_argument("--outdir", default="eval/niche_info")
+    p.add_argument("--outdir", default="results/eval/niche_info")
     p.add_argument("--no-plot", action="store_true")
     a = p.parse_args()
 

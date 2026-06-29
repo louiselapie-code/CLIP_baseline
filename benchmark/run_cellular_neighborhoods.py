@@ -13,7 +13,7 @@ Exemple :
   python benchmark/run_cellular_neighborhoods.py \
     --paired-dir data/processed/xenium_renal \
     --spatial-h5ad data/raw/xenium_renal/h5ad/xenium_renal_rna_with_spatial_split_seed42.h5ad \
-    --n-domains 5 --n-phenotypes 15 --k 20 --outdir eval/benchmark_xenium/protein_cn
+    --n-domains 5 --n-phenotypes 15 --k 20 --outdir results/eval/benchmark_xenium/protein_cn
 """
 from __future__ import annotations
 
@@ -36,7 +36,7 @@ def main():
     ap.add_argument("--n-phenotypes", type=int, default=15, help="nb de phénotypes protéiques (étape 1)")
     ap.add_argument("--k", type=int, default=20, help="voisins de la fenêtre (étape 2)")
     ap.add_argument("--seed", type=int, default=0)
-    ap.add_argument("--outdir", default="eval/benchmark_xenium/protein_cn")
+    ap.add_argument("--outdir", default="results/eval/benchmark_xenium/protein_cn")
     a = ap.parse_args()
 
     out = Path(a.outdir); out.mkdir(parents=True, exist_ok=True)

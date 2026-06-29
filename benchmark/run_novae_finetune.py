@@ -17,7 +17,7 @@ Exemple :
     --rna-h5ad data/raw/xenium_renal/h5ad/xenium_renal_rna_with_spatial_split_seed42.h5ad \
     --paired-dir data/processed/xenium_renal \
     --model MICS-Lab/novae-human-0 --radius <le même qu'au précalcul> \
-    --n-domains 5 --max-epochs 10 --accelerator cpu --outdir eval/benchmark_xenium
+    --n-domains 5 --max-epochs 10 --accelerator cpu --outdir results/eval/benchmark_xenium
 """
 from __future__ import annotations
 
@@ -43,7 +43,7 @@ def main():
     ap.add_argument("--lr", type=float, default=5e-4)
     ap.add_argument("--accelerator", default="cpu")
     ap.add_argument("--num-workers", type=int, default=0)
-    ap.add_argument("--outdir", default="eval/benchmark_xenium")
+    ap.add_argument("--outdir", default="results/eval/benchmark_xenium")
     a = ap.parse_args()
 
     out = Path(a.outdir); out.mkdir(parents=True, exist_ok=True)

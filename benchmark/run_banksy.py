@@ -18,7 +18,7 @@ directement sur src/pathology_validation.py --maps.
 Exemple :
   python benchmark/run_banksy.py \
     --rna-h5ad data/raw/xenium_renal/h5ad/xenium_renal_rna_with_spatial_split_seed42.h5ad \
-    --paired-dir data/processed/xenium_renal --n-domains 5 --outdir eval/benchmark_xenium
+    --paired-dir data/processed/xenium_renal --n-domains 5 --outdir results/eval/benchmark_xenium
 """
 from __future__ import annotations
 
@@ -59,7 +59,7 @@ def main():
     ap.add_argument("--k", type=int, default=18, help="voisins spatiaux")
     ap.add_argument("--n-pcs", type=int, default=20)
     ap.add_argument("--seed", type=int, default=0)
-    ap.add_argument("--outdir", default="eval/benchmark_xenium")
+    ap.add_argument("--outdir", default="results/eval/benchmark_xenium")
     a = ap.parse_args()
 
     out = Path(a.outdir); out.mkdir(parents=True, exist_ok=True)

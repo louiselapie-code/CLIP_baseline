@@ -305,7 +305,7 @@ def parse():
     p.add_argument("--src", required=True)
     p.add_argument("--paired-dir", required=True)
     p.add_argument("--outdir", required=True)
-    p.add_argument("--mode", choices=["train", "eval", "labels", "both"], default="both")
+    p.add_argument("--mode", choices=["train", "results/eval", "labels", "both"], default="both")
     p.add_argument("--labels", default=None)
     p.add_argument("--label-col", default="qc_celltype_cpu")
     p.add_argument("--n-clusters", type=int, default=0)
@@ -339,7 +339,7 @@ if __name__ == "__main__":
     torch.set_num_threads(4)
     if a.mode in ("train", "both"):
         train(a, M, PE, SC)
-    if a.mode in ("eval", "both"):
+    if a.mode in ("results/eval", "both"):
         evaluate(a, M, PE, SC)
     if a.mode in ("labels", "both") and a.labels:
         eval_labels(a, M, PE, SC)

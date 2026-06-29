@@ -161,7 +161,7 @@ def main():
     p = argparse.ArgumentParser(description="Évaluation §8 du CLIP sur le test.")
     p.add_argument("--paired-dir", required=True)
     p.add_argument("--ckpt", required=True)
-    p.add_argument("--outdir", default="eval")
+    p.add_argument("--outdir", default="results/eval")
     p.add_argument("--labels", default=None, help="CSV cell_id,label (optionnel)")
     p.add_argument("--label-col", default="label")
     p.add_argument("--n-clusters", type=int, default=0, help="0 = nb de labels uniques")

@@ -23,16 +23,16 @@ Exemples :
   python eval_niches.py \
     --paired-dir data/processed/cosmx_breast \
     --spatial-h5ad data/raw/cosmx_breast/h5ad/cosmx_breast_rna_with_spatial_split_seed42.h5ad \
-    --ckpt runs/clip_cosmx_seed42/best.pt \
+    --ckpt results/runs/clip_cosmx_seed42/best.pt \
     --spaces novae_raw,clip_rna,clip_prot,clip_joint \
-    --n-domains 10 --outdir eval/niches_cosmx
+    --n-domains 10 --outdir results/eval/niches_cosmx
 
   # Ajouter scConcept brut comme comparaison d'encodeur ARN
   python eval_niches.py --paired-dir data/processed/xenium_renal \
     --spatial-h5ad data/raw/xenium_renal/h5ad/xenium_renal_rna_with_spatial_split_seed42.h5ad \
-    --ckpt runs/clip_xenium_seed42/best.pt \
-    --scconcept-h5ad annotation_out/xenium_annotated.h5ad \
-    --spaces novae_raw,clip_joint,scconcept_raw --n-domains 10 --outdir eval/niches_xenium
+    --ckpt results/runs/clip_xenium_seed42/best.pt \
+    --scconcept-h5ad annotation/xenium_annotated.h5ad \
+    --spaces novae_raw,clip_joint,scconcept_raw --n-domains 10 --outdir results/eval/niches_xenium
 """
 from __future__ import annotations
 
@@ -289,7 +289,7 @@ def main():
     p.add_argument("--label-col", default="cell_type_final")
     p.add_argument("--label-drop", default="incertaine", help="labels exclus de l'ARI/NMI (virgules), ex. incertaine,NA")
     p.add_argument("--max-fit-cells", type=int, default=100_000, help="sous-échantillon KMeans")
-    p.add_argument("--outdir", default="eval/niches")
+    p.add_argument("--outdir", default="results/eval/niches")
     p.add_argument("--no-plot", action="store_true")
     p.add_argument("--device", default="cpu")
     p.add_argument("--seed", type=int, default=0)

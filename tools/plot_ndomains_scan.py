@@ -1,11 +1,11 @@
 """
 plot_ndomains_scan.py — Agrège les résultats du scan n_domains et trace ARI/NMI vs n.
 
-Lit eval/scan_<dataset>/patho_n<n>/pathology_summary.csv pour chaque n, et produit :
+Lit results/eval/scan_<dataset>/patho_n<n>/pathology_summary.csv pour chaque n, et produit :
   scan_summary.csv   (méthode × n : ARI, NMI, homogénéité)
   scan_ndomains.png  (2 courbes : ARI vs n et NMI vs n, une ligne par méthode)
 
-Usage : python tools/plot_ndomains_scan.py --base eval/scan_xenium --ns "5 7 10 15"
+Usage : python tools/plot_ndomains_scan.py --base results/eval/scan_xenium --ns "5 7 10 15"
 """
 from __future__ import annotations
 

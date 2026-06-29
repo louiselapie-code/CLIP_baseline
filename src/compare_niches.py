@@ -18,21 +18,21 @@ Exemple :
   # 1) générer les deux cartes clip_joint (sur ta machine, torch requis)
   python src/eval_niches.py --paired-dir data/processed/cosmx_breast \
     --spatial-h5ad data/raw/cosmx_breast/h5ad/cosmx_breast_rna_with_spatial_split_seed42.h5ad \
-    --ckpt runs/clip_cosmx_seed42/best.pt --spaces clip_joint --n-domains 10 \
-    --outdir eval/niches_cosmx_novae
+    --ckpt results/runs/clip_cosmx_seed42/best.pt --spaces clip_joint --n-domains 10 \
+    --outdir results/eval/niches_cosmx_novae
   python src/eval_niches.py --paired-dir data/processed/cosmx_breast_scconcept \
     --spatial-h5ad data/raw/cosmx_breast/h5ad/cosmx_breast_rna_with_spatial_split_seed42.h5ad \
-    --ckpt runs/clip_cosmx_scconcept_seed42/best.pt --spaces clip_joint --n-domains 10 \
-    --outdir eval/niches_cosmx_scconcept
+    --ckpt results/runs/clip_cosmx_scconcept_seed42/best.pt --spaces clip_joint --n-domains 10 \
+    --outdir results/eval/niches_cosmx_scconcept
 
   # 2) comparer
   python src/compare_niches.py \
     --paired-dir data/processed/cosmx_breast \
     --spatial-h5ad data/raw/cosmx_breast/h5ad/cosmx_breast_rna_with_spatial_split_seed42.h5ad \
-    --labels-h5ad annotation_out/cosmx_annotated.h5ad \
+    --labels-h5ad annotation/cosmx_annotated.h5ad \
     --maps NOVAE=eval/niches_cosmx_novae/domains_clip_joint.npy \
            scConcept=eval/niches_cosmx_scconcept/domains_clip_joint.npy \
-    --outdir eval/compare_cosmx
+    --outdir results/eval/compare_cosmx
 """
 from __future__ import annotations
 
@@ -77,7 +77,7 @@ def main():
     p.add_argument("--label-col", default="cell_type_final")
     p.add_argument("--label-drop", default="incertaine")
     p.add_argument("--knn-graph", type=int, default=6)
-    p.add_argument("--outdir", default="eval/niches_compare")
+    p.add_argument("--outdir", default="results/eval/niches_compare")
     a = p.parse_args()
 
     out = Path(a.outdir)

@@ -20,7 +20,7 @@ Exemple :
     --maps NOVAE_raw=eval/niches_xenium/domains_novae_raw.npy \
            NOVAE_joint=eval/niches_xenium/domains_clip_joint.npy \
            scConcept_joint=eval/niches_xenium_scconcept/domains_clip_joint.npy \
-    --outdir eval/pathology_xenium
+    --outdir results/eval/pathology_xenium
 """
 from __future__ import annotations
 
@@ -88,7 +88,7 @@ def main():
     ap.add_argument("--alignment", required=True, help="CSV matrice affine 3x3 (H&E alignment)")
     ap.add_argument("--scale", type=float, default=0.2125, help="µm/pixel (Xenium = 0.2125)")
     ap.add_argument("--maps", nargs="+", required=True, help="nom=domains.npy (2+ partitions)")
-    ap.add_argument("--outdir", default="eval/pathology_xenium")
+    ap.add_argument("--outdir", default="results/eval/pathology_xenium")
     ap.add_argument("--no-plot", action="store_true")
     a = ap.parse_args()
 

@@ -23,7 +23,7 @@ Sortie : rapport console + PNG (2 panneaux).
 Usage :
     python diagnose_radius_buffer.py \
         --h5ad data/raw/cosmx_breast_rna_with_spatial_split_seed42.h5ad \
-        --radius 100 --layers 1 2 3 4 --outdir runs/diag
+        --radius 100 --layers 1 2 3 4 --outdir results/runs/diag
     # Xenium en pixels : ajouter --scale 0.2125 pour convertir en µm.
 """
 from __future__ import annotations

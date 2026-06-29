@@ -263,7 +263,7 @@ def _plot_curves(path, rows):
 def parse_args():
     p = argparse.ArgumentParser(description="Entraînement du CLIP ARN–protéine (baseline).")
     p.add_argument("--paired-dir", required=True, help="Dossier avec paired_rna.npy, paired_protein.npy, paired_cells.csv")
-    p.add_argument("--outdir", default="runs/baseline")
+    p.add_argument("--outdir", default="results/runs/baseline")
     p.add_argument("--epochs", type=int, default=50)
     p.add_argument("--batch-size", type=int, default=512)
     p.add_argument("--lr", type=float, default=1e-4)

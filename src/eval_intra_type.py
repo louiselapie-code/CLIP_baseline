@@ -15,9 +15,9 @@ le CLIP sur scConcept.
 
 Usage :
   python eval_intra_type.py --paired-dir data/processed/cosmx_breast \
-      --ckpt runs/clip_cosmx_seed42/best.pt \
-      --labels annotation_out/labels_cosmx.csv --label-col cell_type \
-      --rna-h5ad annotation_out/cosmx_annotated.h5ad --rna-obsm X_scConcept \
+      --ckpt results/runs/clip_cosmx_seed42/best.pt \
+      --labels annotation/labels/cosmx_labels.csv --label-col cell_type \
+      --rna-h5ad annotation/cosmx_annotated.h5ad --rna-obsm X_scConcept \
       --min-cells 200 --device cpu
 """
 import argparse

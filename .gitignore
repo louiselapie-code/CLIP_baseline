@@ -25,3 +25,6 @@ data/
 
 # Mac
 .DS_Store
+
+# Sorties temporaires
+outputs/
