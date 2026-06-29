@@ -1,0 +1,55 @@
+{
+  "config": {
+    "paired_dir": "data/processed/cosmx_breast_scconcept",
+    "spatial_h5ad": "data/raw/cosmx_breast/h5ad/cosmx_breast_rna_with_spatial_split_seed42.h5ad",
+    "spatial_obsm": "spatial_um",
+    "ckpt": "runs/clip_cosmx_scconcept_seed42/best.pt",
+    "spaces": "clip_joint",
+    "scconcept_h5ad": null,
+    "scconcept_obsm": "X_scConcept",
+    "num_prototypes": 512,
+    "n_domains": 10,
+    "niche_method": "hierarchical",
+    "resolution": 1.0,
+    "assign": "argmax",
+    "smooth_knn": 0,
+    "knn_graph": 6,
+    "cells": "all",
+    "slide_key": null,
+    "labels_h5ad": null,
+    "label_col": "cell_type_final",
+    "label_drop": "incertaine",
+    "max_fit_cells": 100000,
+    "outdir": "eval/niches_cosmx_scconcept",
+    "no_plot": false,
+    "device": "cpu",
+    "seed": 0
+  },
+  "n_cells_eval": 152446,
+  "spaces": {
+    "clip_joint": {
+      "dim": 256,
+      "n_domains": 10,
+      "level": 10,
+      "n_prototypes_used": 512,
+      "FIDE": 0.502883875310501,
+      "entropie_norm": 0.9464672367765002,
+      "heuristique": 0.475963111884588,
+      "JSD": null,
+      "ARI_vs_types": null,
+      "NMI_vs_types": null,
+      "tailles_domaines": [
+        10686,
+        15404,
+        11500,
+        6442,
+        4011,
+        26257,
+        28035,
+        18642,
+        13017,
+        18452
+      ]
+    }
+  }
+}

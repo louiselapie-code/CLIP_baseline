@@ -1,0 +1,20 @@
+[
+  {
+    "carte": "NOVAE",
+    "n_dom": 10,
+    "FIDE": 0.7385,
+    "entropie_norm": 0.8463,
+    "heuristique": 0.625,
+    "ARI_types": 0.0084,
+    "NMI_types": 0.0786
+  },
+  {
+    "carte": "scConcept",
+    "n_dom": 10,
+    "FIDE": 0.5029,
+    "entropie_norm": 0.9465,
+    "heuristique": 0.476,
+    "ARI_types": 0.0329,
+    "NMI_types": 0.1451
+  }
+]

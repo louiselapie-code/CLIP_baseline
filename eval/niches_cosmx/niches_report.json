@@ -1,0 +1,116 @@
+{
+  "config": {
+    "paired_dir": "data/processed/cosmx_breast",
+    "spatial_h5ad": "data/raw/cosmx_breast/h5ad/cosmx_breast_rna_with_spatial_split_seed42.h5ad",
+    "spatial_obsm": "spatial_um",
+    "ckpt": "runs/clip_cosmx_seed42/best.pt",
+    "spaces": "novae_raw,clip_rna,clip_prot,clip_joint",
+    "scconcept_h5ad": null,
+    "scconcept_obsm": "X_scConcept",
+    "num_prototypes": 512,
+    "n_domains": 10,
+    "niche_method": "hierarchical",
+    "resolution": 1.0,
+    "assign": "argmax",
+    "smooth_knn": 0,
+    "knn_graph": 6,
+    "cells": "all",
+    "slide_key": null,
+    "max_fit_cells": 100000,
+    "outdir": "eval/niches_cosmx",
+    "no_plot": false,
+    "device": "cpu",
+    "seed": 0
+  },
+  "n_cells_eval": 152446,
+  "spaces": {
+    "novae_raw": {
+      "dim": 64,
+      "n_domains": 10,
+      "level": 10,
+      "n_prototypes_used": 512,
+      "FIDE": 0.5986030012090438,
+      "entropie_norm": 0.9224522936562985,
+      "heuristique": 0.5521827114548264,
+      "JSD": null,
+      "tailles_domaines": [
+        181,
+        9392,
+        24693,
+        21324,
+        5953,
+        27181,
+        15731,
+        18529,
+        12681,
+        16781
+      ]
+    },
+    "clip_rna": {
+      "dim": 256,
+      "n_domains": 10,
+      "level": 10,
+      "n_prototypes_used": 512,
+      "FIDE": 0.6490659778764255,
+      "entropie_norm": 0.9219369992852758,
+      "heuristique": 0.598397939981555,
+      "JSD": null,
+      "tailles_domaines": [
+        7487,
+        8757,
+        21932,
+        10874,
+        22955,
+        2993,
+        6287,
+        23169,
+        32185,
+        15807
+      ]
+    },
+    "clip_prot": {
+      "dim": 256,
+      "n_domains": 10,
+      "level": 10,
+      "n_prototypes_used": 512,
+      "FIDE": 0.6889262422995057,
+      "entropie_norm": 0.8457395729000678,
+      "heuristique": 0.5826521859220326,
+      "JSD": null,
+      "tailles_domaines": [
+        592,
+        4783,
+        1269,
+        14380,
+        37514,
+        20434,
+        21108,
+        14317,
+        5067,
+        32982
+      ]
+    },
+    "clip_joint": {
+      "dim": 256,
+      "n_domains": 10,
+      "level": 10,
+      "n_prototypes_used": 512,
+      "FIDE": 0.7385365827855119,
+      "entropie_norm": 0.8462625862955435,
+      "heuristique": 0.6249958786219401,
+      "JSD": null,
+      "tailles_domaines": [
+        6206,
+        2484,
+        14714,
+        15766,
+        19258,
+        5984,
+        1612,
+        8131,
+        37980,
+        40311
+      ]
+    }
+  }
+}

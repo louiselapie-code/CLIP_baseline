@@ -1,0 +1,5 @@
+espace,dim,n_dom,FIDE,entropie_norm,heuristique,JSD
+novae_raw,64,10,0.5986,0.9225,0.5522,
+clip_rna,256,10,0.6491,0.9219,0.5984,
+clip_prot,256,10,0.6889,0.8457,0.5827,
+clip_joint,256,10,0.7385,0.8463,0.625,

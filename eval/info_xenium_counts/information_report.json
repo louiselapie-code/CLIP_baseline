@@ -1,0 +1,51 @@
+{
+  "rna_target": "ARN counts (ind\u00e9pendant)",
+  "n_cells": 465498,
+  "n_domains": 10,
+  "explained_variance": {
+    "niche_ARN": {
+      "EV_ARN": 0.034193412925016875,
+      "EV_protein": 0.12165254040428464
+    },
+    "niche_prot": {
+      "EV_ARN": 0.050698045158184546,
+      "EV_protein": 0.35290797198430723
+    },
+    "niche_joint": {
+      "EV_ARN": 0.04866613830810895,
+      "EV_protein": 0.16577939176075396
+    },
+    "al\u00e9atoire": {
+      "EV_ARN": 1.7456508160503443e-05,
+      "EV_protein": 1.69546879891976e-05
+    }
+  },
+  "verdict_multiomique_plus_informatif": false,
+  "gain_protein_vs_niche_ARN": 0.04412685135646932,
+  "gain_ARN_vs_niche_prot": -0.0020319068500755932,
+  "relations": {
+    "ARN_vs_joint": {
+      "H_a": 2.5954730919345543,
+      "H_b": 2.723432144865464,
+      "H_a_given_b": 1.5906312594743512,
+      "H_b_given_a": 1.7185903124052608,
+      "MI_bits": 1.004841832460203,
+      "AMI": 0.37780845784356776
+    },
+    "prot_vs_joint": {
+      "H_a": 2.470781959891292,
+      "H_b": 2.723432144865464,
+      "H_a_given_b": 1.8680162724312581,
+      "H_b_given_a": 2.12066645740543,
+      "MI_bits": 0.6027656874600338,
+      "AMI": 0.23205402180579096
+    }
+  },
+  "drilldown": {
+    "niche_ARN_choisie": 7,
+    "n_sous_niches": 9,
+    "n_cellules": 76912,
+    "EV_protein_inter_sous_niches": 0.1364316012769572,
+    "permutation_p": 0.004975124378109453
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "config": {
+    "paired_dir": "data/processed/xenium_renal_scconcept",
+    "spatial_h5ad": "data/raw/xenium_renal/h5ad/xenium_renal_rna_with_spatial_split_seed42.h5ad",
+    "spatial_obsm": "spatial_um",
+    "ckpt": "runs/clip_xenium_scconcept_seed42/best.pt",
+    "spaces": "clip_joint",
+    "scconcept_h5ad": null,
+    "scconcept_obsm": "X_scConcept",
+    "num_prototypes": 512,
+    "n_domains": 15,
+    "niche_method": "hierarchical",
+    "resolution": 1.0,
+    "assign": "argmax",
+    "smooth_knn": 0,
+    "knn_graph": 6,
+    "cells": "all",
+    "slide_key": null,
+    "labels_h5ad": null,
+    "label_col": "cell_type_final",
+    "label_drop": "incertaine",
+    "max_fit_cells": 100000,
+    "outdir": "eval/scan_xenium/scc_n15",
+    "no_plot": true,
+    "device": "cpu",
+    "seed": 0
+  },
+  "n_cells_eval": 465498,
+  "spaces": {
+    "clip_joint": {
+      "dim": 256,
+      "n_domains": 15,
+      "level": 15,
+      "n_prototypes_used": 512,
+      "FIDE": 0.255762996302423,
+      "entropie_norm": 0.9040178206679584,
+      "heuristique": 0.23121430652482355,
+      "JSD": null,
+      "ARI_vs_types": null,
+      "NMI_vs_types": null,
+      "tailles_domaines": [
+        4221,
+        5635,
+        61427,
+        37670,
+        12666,
+        22299,
+        62098,
+        59183,
+        5252,
+        12144,
+        32037,
+        51310,
+        20331,
+        19783,
+        59442
+      ]
+    }
+  }
+}

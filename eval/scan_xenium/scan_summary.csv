@@ -1,0 +1,13 @@
+méthode,ARI_vs_patho,NMI_vs_patho,homogénéité,n_domains
+NOVAE_joint,0.426,0.3405,0.4868,5
+NOVAE_raw,0.1934,0.1574,0.1977,5
+scConcept_joint,0.0435,0.1188,0.1924,5
+NOVAE_joint,0.4138,0.3284,0.5022,7
+NOVAE_raw,0.1666,0.2167,0.346,7
+scConcept_joint,0.0453,0.1178,0.2081,7
+NOVAE_joint,0.206,0.2869,0.5389,10
+NOVAE_raw,0.1115,0.1874,0.3479,10
+scConcept_joint,0.0643,0.1382,0.2911,10
+NOVAE_joint,0.1339,0.2632,0.5697,15
+NOVAE_raw,0.1389,0.2206,0.4825,15
+scConcept_joint,0.0631,0.1455,0.3351,15

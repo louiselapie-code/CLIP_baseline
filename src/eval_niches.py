@@ -220,6 +220,49 @@ def plot_niches(coords, domains, outpath, title, max_points=60000, seed=0):
     print(f"  carte spatiale : {outpath}")
 
 
+def plot_compare(coords, domains_by_space, outpath, max_points=60000, seed=0):
+    """Cartes spatiales des niches côte à côte (un panneau par espace), mêmes coords."""
+    try:
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+    except Exception as e:  # pragma: no cover
+        print(f"  [info] matplotlib indisponible, figure comparative ignorée ({e}).")
+        return
+    names = list(domains_by_space)
+    rng = np.random.default_rng(seed)
+    idx = np.arange(len(coords))
+    if len(idx) > max_points:
+        idx = rng.choice(idx, max_points, replace=False)
+    fig, axes = plt.subplots(1, len(names), figsize=(6 * len(names), 6), squeeze=False)
+    for ax, name in zip(axes[0], names):
+        d = np.asarray(domains_by_space[name])
+        ax.scatter(coords[idx, 0], coords[idx, 1], c=d[idx], cmap="tab20", s=2, alpha=0.7)
+        ax.set_aspect("equal")
+        ax.invert_yaxis()
+        ax.set_title(name)
+        ax.set_xticks([])
+        ax.set_yticks([])
+    fig.tight_layout()
+    fig.savefig(outpath, dpi=120)
+    plt.close(fig)
+    print(f"  figure comparative : {outpath}")
+
+
+def ari_nmi(domains, labels, drop):
+    """ARI/NMI entre niches et labels de types cellulaires, hors labels exclus. (None si indispo.)"""
+    if labels is None:
+        return None, None
+    from sklearn.metrics import adjusted_rand_score, normalized_mutual_info_score
+
+    keep = np.array([str(l) not in drop for l in labels])
+    if keep.sum() == 0 or len(np.unique(labels[keep])) < 2:
+        return None, None
+    return (float(adjusted_rand_score(labels[keep], np.asarray(domains)[keep])),
+            float(normalized_mutual_info_score(labels[keep], np.asarray(domains)[keep])))
+
+
 # --------------------------------------------------------------------------- #
 # Main
 # --------------------------------------------------------------------------- #
@@ -242,6 +285,9 @@ def main():
     p.add_argument("--knn-graph", type=int, default=6, help="k du graphe spatial pour le FIDE")
     p.add_argument("--cells", default="all", choices=["all", "train", "test"])
     p.add_argument("--slide-key", default=None, help="colonne obs pour le JSD inter-slides (optionnel)")
+    p.add_argument("--labels-h5ad", default=None, help=".h5ad avec obs[label-col] -> ARI/NMI niches vs types cellulaires")
+    p.add_argument("--label-col", default="cell_type_final")
+    p.add_argument("--label-drop", default="incertaine", help="labels exclus de l'ARI/NMI (virgules), ex. incertaine,NA")
     p.add_argument("--max-fit-cells", type=int, default=100_000, help="sous-échantillon KMeans")
     p.add_argument("--outdir", default="eval/niches")
     p.add_argument("--no-plot", action="store_true")
@@ -263,6 +309,8 @@ def main():
         print(f"  [info] obsm['{a.spatial_obsm}'] absent, fallback sur 'spatial'.")
         coords_all, found_sp = load_obsm_aligned(a.spatial_h5ad, "spatial", cell_id, ndim=2)
     slide_all = load_obs_aligned(a.spatial_h5ad, a.slide_key, cell_id) if a.slide_key else None
+    labels_all = load_obs_aligned(a.labels_h5ad, a.label_col, cell_id) if a.labels_h5ad else None
+    label_drop = {s.strip() for s in a.label_drop.split(",")} | {"NA"}
 
     # ---- masque cellules ----
     base_mask = found_sp.copy()
@@ -282,6 +330,7 @@ def main():
     idx = np.where(base_mask)[0]
     coords = coords_all[idx]
     slide = slide_all[idx] if slide_all is not None else None
+    labels = labels_all[idx] if labels_all is not None else None
     print(f"  cellules évaluées : {len(idx)}")
 
     # ---- graphe spatial partagé ----
@@ -291,6 +340,7 @@ def main():
     # ---- boucle sur les espaces ----
     report = {"config": vars(a), "n_cells_eval": int(len(idx)), "spaces": {}}
     rows = []
+    domains_by_space = {}
     for name in spaces:
         print(f"\n=== espace : {name} ===")
         emb_full, valid = build_space(name, rna, prot, cell_id, a)
@@ -318,27 +368,37 @@ def main():
         hent = normalized_entropy(dom, ncl)
         heur = fide * hent
         jsd = jensen_shannon_divergence(dom, slide) if slide is not None else None
+        ari, nmi = ari_nmi(dom, labels, label_drop)
 
         sizes = np.bincount(dom).tolist()
         report["spaces"][name] = {
             "dim": int(E.shape[1]), "n_domains": int(ncl), "level": int(res.level),
             "n_prototypes_used": int(len(np.unique(res.leaves))),
             "FIDE": fide, "entropie_norm": hent, "heuristique": heur, "JSD": jsd,
+            "ARI_vs_types": ari, "NMI_vs_types": nmi,
             "tailles_domaines": sizes,
         }
         rows.append({"espace": name, "dim": E.shape[1], "n_dom": ncl,
                      "FIDE": round(fide, 4), "entropie_norm": round(hent, 4),
                      "heuristique": round(heur, 4),
-                     "JSD": (round(jsd, 4) if jsd is not None else None)})
+                     "JSD": (round(jsd, 4) if jsd is not None else None),
+                     "ARI_types": (round(ari, 4) if ari is not None else None),
+                     "NMI_types": (round(nmi, 4) if nmi is not None else None)})
         print(f"  n_domaines={ncl} (niveau {res.level}) | FIDE={fide:.4f} "
               f"entropie_norm={hent:.4f} heuristique={heur:.4f}"
-              + (f" JSD={jsd:.4f}" if jsd is not None else ""))
+              + (f" JSD={jsd:.4f}" if jsd is not None else "")
+              + (f" | ARI/NMI vs types={ari:.3f}/{nmi:.3f}" if ari is not None else ""))
 
         if not a.no_plot:
             plot_niches(coords, dom, out / f"niches_{name}.png",
                         title=f"{name} — {ncl} niches (FIDE={fide:.3f})")
         # sauvegarde des assignations par cellule
         np.save(out / f"domains_{name}.npy", dom)
+        domains_by_space[name] = dom
+
+    # ---- figure comparative côte-à-côte (tous les espaces du run) ----
+    if not a.no_plot and len(domains_by_space) >= 2:
+        plot_compare(coords, domains_by_space, out / "niches_compare.png")
 
     # ---- table récap + verdict ----
     table = pd.DataFrame(rows)
@@ -350,6 +410,9 @@ def main():
     print("Lecture : FIDE haut = niches spatialement continues ; entropie_norm haute = niches")
     print("équilibrées ; heuristique = compromis des deux. Compare 'novae_raw' (ARN seul) à")
     print("'clip_joint' (multi-omique) pour voir si le CLIP améliore les niches.")
+    if labels is not None:
+        print("ARI/NMI vs types : un score BAS est plutôt sain (niches = voisinages, pas types")
+        print("cellulaires). Un score élevé = l'espace ne fait que du typage cellulaire, pas des niches.")
 
     table.to_csv(out / "niches_summary.csv", index=False)
     json.dump(report, open(out / "niches_report.json", "w"), indent=2, default=str)

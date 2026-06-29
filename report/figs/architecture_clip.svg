@@ -1,0 +1,91 @@
+<svg viewBox="0 0 1100 560" xmlns="http://www.w3.org/2000/svg" font-family="'Helvetica Neue', Arial, sans-serif">
+  <title>Architecture du modèle CLIP ARN-protéine</title>
+  <desc>Deux tours : ARN (NOVAE gelé puis projection) et protéine (MLP peu profond puis projection), alignées dans un espace commun 256-d par une loss InfoNCE symétrique ; en aval, les embeddings servent à calculer des niches spatiales.</desc>
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1100" height="560" fill="#ffffff"/>
+
+  <text x="40" y="40" font-size="20" font-weight="700" fill="#1f2937">Architecture du modèle CLIP ARN–protéine</text>
+
+  <g font-size="12" fill="#334155">
+    <rect x="812" y="22" width="16" height="12" rx="3" fill="#e3edfb" stroke="#2f6fd0"/>
+    <text x="834" y="32">gelé (non entraîné) ❄</text>
+    <rect x="812" y="42" width="16" height="12" rx="3" fill="#fde9d3" stroke="#e07b1a"/>
+    <text x="834" y="52">entraîné</text>
+  </g>
+
+  <text x="24" y="98" font-size="13" font-weight="700" fill="#2f6fd0">Tour ARN</text>
+  <rect x="24" y="112" width="150" height="56" rx="10" fill="#f1f3f7" stroke="#9aa4b2"/>
+  <text x="99" y="137" text-anchor="middle" font-size="13" font-weight="600" fill="#2b3442">ARN spatial</text>
+  <text x="99" y="154" text-anchor="middle" font-size="10.5" fill="#5b6675">CosMx · Xenium</text>
+  <rect x="200" y="112" width="162" height="56" rx="10" fill="#e3edfb" stroke="#2f6fd0"/>
+  <text x="281" y="137" text-anchor="middle" font-size="13" font-weight="700" fill="#173a6b">NOVAE — gelé ❄</text>
+  <text x="281" y="154" text-anchor="middle" font-size="10.5" fill="#2f6fd0">encodeur · 64-d</text>
+  <rect x="388" y="112" width="150" height="56" rx="10" fill="#fde9d3" stroke="#e07b1a"/>
+  <text x="463" y="137" text-anchor="middle" font-size="13" font-weight="600" fill="#7a3e06">Projection · L2</text>
+  <text x="463" y="154" text-anchor="middle" font-size="10.5" fill="#9a5212">64 → 256-d</text>
+  <rect x="562" y="120" width="80" height="40" rx="20" fill="#e9e9fb" stroke="#5b54c9"/>
+  <text x="602" y="145" text-anchor="middle" font-size="15" font-weight="700" fill="#2e2a78">z_r</text>
+
+  <g stroke="#64748b" stroke-width="1.6" marker-end="url(#ar)">
+    <line x1="174" y1="140" x2="198" y2="140"/>
+    <line x1="362" y1="140" x2="386" y2="140"/>
+    <line x1="538" y1="140" x2="560" y2="140"/>
+  </g>
+
+  <text x="24" y="262" font-size="13" font-weight="700" fill="#e07b1a">Tour protéine</text>
+  <rect x="24" y="276" width="150" height="56" rx="10" fill="#f1f3f7" stroke="#9aa4b2"/>
+  <text x="99" y="301" text-anchor="middle" font-size="13" font-weight="600" fill="#2b3442">Protéine spatiale</text>
+  <text x="99" y="318" text-anchor="middle" font-size="10.5" fill="#5b6675">intensités (P marqueurs)</text>
+  <rect x="200" y="276" width="162" height="56" rx="10" fill="#fde9d3" stroke="#e07b1a"/>
+  <text x="281" y="301" text-anchor="middle" font-size="13" font-weight="700" fill="#7a3e06">MLP peu profond</text>
+  <text x="281" y="318" text-anchor="middle" font-size="10.5" fill="#9a5212">2 couches · 128</text>
+  <rect x="388" y="276" width="150" height="56" rx="10" fill="#fde9d3" stroke="#e07b1a"/>
+  <text x="463" y="301" text-anchor="middle" font-size="13" font-weight="600" fill="#7a3e06">Projection · L2</text>
+  <text x="463" y="318" text-anchor="middle" font-size="10.5" fill="#9a5212">→ 256-d</text>
+  <rect x="562" y="284" width="80" height="40" rx="20" fill="#e9e9fb" stroke="#5b54c9"/>
+  <text x="602" y="309" text-anchor="middle" font-size="15" font-weight="700" fill="#2e2a78">z_p</text>
+
+  <g stroke="#64748b" stroke-width="1.6" marker-end="url(#ar)">
+    <line x1="174" y1="304" x2="198" y2="304"/>
+    <line x1="362" y1="304" x2="386" y2="304"/>
+    <line x1="538" y1="304" x2="560" y2="304"/>
+  </g>
+
+  <rect x="690" y="96" width="214" height="252" rx="12" fill="#fbfbfe" stroke="#b9b3e6" stroke-dasharray="5 4"/>
+  <text x="797" y="120" text-anchor="middle" font-size="13" font-weight="700" fill="#3f3a8c">Espace commun (sphère L2)</text>
+  <text x="797" y="137" text-anchor="middle" font-size="11" fill="#6b6f8a">256-d</text>
+  <text x="730" y="160" font-size="11" fill="#5b54c9">z_r ↓</text>
+  <text x="845" y="160" text-anchor="end" font-size="11" fill="#5b54c9">z_p →</text>
+  <g stroke="#cdd4de">
+    <rect x="722" y="168" width="26" height="26" fill="#eef1f6"/><rect x="748" y="168" width="26" height="26" fill="#eef1f6"/><rect x="774" y="168" width="26" height="26" fill="#eef1f6"/><rect x="800" y="168" width="26" height="26" fill="#eef1f6"/><rect x="826" y="168" width="26" height="26" fill="#eef1f6"/>
+    <rect x="722" y="194" width="26" height="26" fill="#eef1f6"/><rect x="748" y="194" width="26" height="26" fill="#eef1f6"/><rect x="774" y="194" width="26" height="26" fill="#eef1f6"/><rect x="800" y="194" width="26" height="26" fill="#eef1f6"/><rect x="826" y="194" width="26" height="26" fill="#eef1f6"/>
+    <rect x="722" y="220" width="26" height="26" fill="#eef1f6"/><rect x="748" y="220" width="26" height="26" fill="#eef1f6"/><rect x="774" y="220" width="26" height="26" fill="#eef1f6"/><rect x="800" y="220" width="26" height="26" fill="#eef1f6"/><rect x="826" y="220" width="26" height="26" fill="#eef1f6"/>
+    <rect x="722" y="246" width="26" height="26" fill="#eef1f6"/><rect x="748" y="246" width="26" height="26" fill="#eef1f6"/><rect x="774" y="246" width="26" height="26" fill="#eef1f6"/><rect x="800" y="246" width="26" height="26" fill="#eef1f6"/><rect x="826" y="246" width="26" height="26" fill="#eef1f6"/>
+    <rect x="722" y="272" width="26" height="26" fill="#eef1f6"/><rect x="748" y="272" width="26" height="26" fill="#eef1f6"/><rect x="774" y="272" width="26" height="26" fill="#eef1f6"/><rect x="800" y="272" width="26" height="26" fill="#eef1f6"/><rect x="826" y="272" width="26" height="26" fill="#eef1f6"/>
+    <rect x="722" y="168" width="26" height="26" fill="#e07b1a"/><rect x="748" y="194" width="26" height="26" fill="#e07b1a"/><rect x="774" y="220" width="26" height="26" fill="#e07b1a"/><rect x="800" y="246" width="26" height="26" fill="#e07b1a"/><rect x="826" y="272" width="26" height="26" fill="#e07b1a"/>
+  </g>
+  <text x="797" y="318" text-anchor="middle" font-size="12.5" font-weight="700" fill="#3f3a8c">Loss InfoNCE symétrique</text>
+  <text x="797" y="335" text-anchor="middle" font-size="11" fill="#555555">τ = 0.07 · diagonale = paires +</text>
+  <g stroke="#64748b" stroke-width="1.6" marker-end="url(#ar)">
+    <line x1="642" y1="140" x2="688" y2="150"/>
+    <line x1="642" y1="304" x2="688" y2="294"/>
+  </g>
+
+  <line x1="40" y1="398" x2="1060" y2="398" stroke="#e5e7eb" stroke-width="1.2"/>
+  <text x="40" y="420" font-size="13" font-weight="700" fill="#475569">En aval (cette étude) — niches spatiales :</text>
+  <rect x="40" y="436" width="226" height="48" rx="10" fill="#e9e9fb" stroke="#5b54c9"/>
+  <text x="153" y="465" text-anchor="middle" font-size="13" font-weight="600" fill="#2e2a78">z_joint = L2(z_r + z_p)</text>
+  <rect x="318" y="436" width="320" height="48" rx="10" fill="#f1f3f7" stroke="#9aa4b2"/>
+  <text x="478" y="458" text-anchor="middle" font-size="13" font-weight="600" fill="#2b3442">Tête de niches (fin de NOVAE)</text>
+  <text x="478" y="474" text-anchor="middle" font-size="10.5" fill="#5b6675">prototypes · transport optimal · hiérarchie</text>
+  <rect x="690" y="436" width="180" height="48" rx="10" fill="#f1f3f7" stroke="#9aa4b2"/>
+  <text x="780" y="465" text-anchor="middle" font-size="13" font-weight="600" fill="#2b3442">Niches spatiales</text>
+  <g stroke="#64748b" stroke-width="1.6" marker-end="url(#ar)">
+    <line x1="266" y1="460" x2="316" y2="460"/>
+    <line x1="638" y1="460" x2="688" y2="460"/>
+  </g>
+</svg>
